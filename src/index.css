@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Poppins", sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-mono: "Courier Prime", "JetBrains Mono", monospace;
+  --color-terracotta: #CD6E4E;
+  --color-terracotta-hover: #E07E5D;
+  --color-burnt-sienna: #A75338;
+  --color-pale-cream: #ECE8E1;
+  --color-dark-canvas: #161717;
+  --color-dark-card: #242625;
+  --color-dark-border: #383A39;
+}
+
+:root {
+  font-family: "Poppins", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, sans-serif;
+  background-color: #161717;
+  color: #ECE8E1;
+}
+
+/* Display & Section Headings */
+h1, h2, h3, h4, h5, h6, .font-serif, .font-display {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Monospace, Code, and Tech Tags */
+code, pre, kbd, samp, .font-mono {
+  font-family: "Courier Prime", "JetBrains Mono", monospace;
+}
+
+/* High-Contrast Light Theme Overrides */
+.light-theme {
+  color-scheme: light;
+  background-color: #ECE8E1 !important;
+  color: #161717 !important;
+}
+
+.light-theme .bg-\[\#1d1f1e\] {
+  background-color: #FFFFFF !important;
+}
+
+.light-theme .bg-\[\#242625\] {
+  background-color: #F4F1EA !important;
+}
+
+.light-theme .bg-\[\#161717\] {
+  background-color: #FFFFFF !important;
+}
+
+.light-theme .bg-\[\#2e302f\] {
+  background-color: #E6E1D7 !important;
+}
+
+.light-theme .border-\[\#383A39\] {
+  border-color: #D6D0C4 !important;
+}
+
+.light-theme :not(.dark-code-block).text-white,
+.light-theme :not(.dark-code-block).text-slate-50,
+.light-theme :not(.dark-code-block).text-slate-100,
+.light-theme :not(.dark-code-block).text-slate-200,
+.light-theme :not(.dark-code-block).text-gray-50,
+.light-theme :not(.dark-code-block).text-gray-100,
+.light-theme :not(.dark-code-block).text-gray-200,
+.light-theme :not(.dark-code-block).text-\[\#ECE8E1\],
+.light-theme :not(.dark-code-block) .text-white,
+.light-theme :not(.dark-code-block) .text-slate-50,
+.light-theme :not(.dark-code-block) .text-slate-100,
+.light-theme :not(.dark-code-block) .text-slate-200,
+.light-theme :not(.dark-code-block) .text-gray-50,
+.light-theme :not(.dark-code-block) .text-gray-100,
+.light-theme :not(.dark-code-block) .text-gray-200,
+.light-theme :not(.dark-code-block) .text-\[\#ECE8E1\] {
+  color: #161717 !important;
+}
+
+.light-theme :not(.dark-code-block).text-slate-300,
+.light-theme :not(.dark-code-block).text-gray-300,
+.light-theme :not(.dark-code-block) .text-slate-300,
+.light-theme :not(.dark-code-block) .text-gray-300 {
+  color: #2E302F !important;
+}
+
+.light-theme :not(.dark-code-block).text-slate-400,
+.light-theme :not(.dark-code-block).text-gray-400,
+.light-theme :not(.dark-code-block) .text-slate-400,
+.light-theme :not(.dark-code-block) .text-gray-400 {
+  color: #4A4D4B !important;
+}
+
+.light-theme :not(.dark-code-block).text-slate-500,
+.light-theme :not(.dark-code-block).text-gray-500,
+.light-theme :not(.dark-code-block) .text-slate-500,
+.light-theme :not(.dark-code-block) .text-gray-500 {
+  color: #616563 !important;
+}
+
+.light-theme .hover\:bg-\[\#2e302f\]:hover {
+  background-color: #E6E1D7 !important;
+}
+
+.light-theme .hover\:bg-\[\#1d1f1e\]:hover {
+  background-color: #F4F1EA !important;
+}
+
+.light-theme .bg-black\/80,
+.light-theme .bg-black\/70 {
+  background-color: rgba(36, 38, 37, 0.7) !important;
+}
+
+/* Maintain crisp white text on solid dark/colored buttons and badges in light theme */
+.light-theme .bg-emerald-500 .text-white,
+.light-theme .bg-red-500 .text-white,
+.light-theme .bg-\[\#CD6E4E\] .text-white,
+.light-theme .bg-slate-800 .text-white,
+.light-theme .bg-slate-900 .text-white,
+.light-theme .bg-black .text-white {
+  color: #FFFFFF !important;
+}
+
+/* Ensure bright pastel accent text becomes high-contrast deep rich tones in light theme */
+.light-theme :not(.dark-code-block).text-emerald-300,
+.light-theme :not(.dark-code-block).text-emerald-400,
+.light-theme :not(.dark-code-block) .text-emerald-400 {
+  color: #047857 !important;
+}
+
+.light-theme :not(.dark-code-block).text-amber-300,
+.light-theme :not(.dark-code-block).text-amber-400,
+.light-theme :not(.dark-code-block) .text-amber-400 {
+  color: #B45309 !important;
+}
+
+.light-theme :not(.dark-code-block).text-blue-300,
+.light-theme :not(.dark-code-block).text-blue-400,
+.light-theme :not(.dark-code-block) .text-blue-400 {
+  color: #1D4ED8 !important;
+}
+
+.light-theme :not(.dark-code-block).text-rose-400,
+.light-theme :not(.dark-code-block) .text-rose-400 {
+  color: #BE123C !important;
+}
+
+.light-theme :not(.dark-code-block).text-purple-400,
+.light-theme :not(.dark-code-block) .text-purple-400 {
+  color: #7E22CE !important;
+}
+
+.light-theme :not(.dark-code-block).text-red-400,
+.light-theme :not(.dark-code-block) .text-red-400 {
+  color: #B91C1C !important;
+}
+
+/* Preserve Dark IDE Styling for Code Blocks / Terminals in Light Theme */
+.light-theme .dark-code-block {
+  background-color: #121313 !important;
+  border-color: #2E302F !important;
+}
+
+.light-theme .dark-code-block .text-white {
+  color: #FFFFFF !important;
+}
+
+.light-theme .dark-code-block .text-slate-300 {
+  color: #CBD5E1 !important;
+}
+
+.light-theme .dark-code-block .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+.light-theme .dark-code-block .text-slate-500 {
+  color: #64748B !important;
+}
+
+.light-theme .dark-code-block .text-amber-300 {
+  color: #FCD34D !important;
+}
+
+.light-theme .dark-code-block .text-emerald-300 {
+  color: #6EE7B7 !important;
+}
+
+.light-theme .dark-code-block .text-emerald-400 {
+  color: #34D399 !important;
+}
+
+.light-theme .dark-code-block .text-blue-300 {
+  color: #93C5FD !important;
+}
+
+.light-theme .dark-code-block .text-yellow-300 {
+  color: #FDE047 !important;
+}
+
+.light-theme .dark-code-block .text-rose-400 {
+  color: #FB7185 !important;
+}
+
+.light-theme .dark-code-block .text-purple-400 {
+  color: #C084FC !important;
+}
+
+/* Visible professional fine granules / grain background overlay */
+.bg-granules {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='granuleNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23granuleNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
