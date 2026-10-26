@@ -30,8 +30,8 @@ export interface BankTransferDetails {
 export const BANK_TRANSFER: BankTransferDetails = {
   accountNumber: '00300114746720',
   iban: 'PK66MEZN0000300114746720',
-  bankName: null,
-  beneficiaryName: null,
-  swiftBic: null,
-  currencyNote: null,
+  bankName: 'Meezan Bank',
+  beneficiaryName: 'ALI AHSAN',
+  swiftBic: 'MEZNPKKA',
+  currencyNote: 'Account is in PKR',
 };
