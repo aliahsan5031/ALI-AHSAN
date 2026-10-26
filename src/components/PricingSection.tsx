@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { PRICING_PLANS, PERSONAL_INFO } from '../data/portfolioData';
-import { Check, Clock, ArrowRight, X, CreditCard, Mail, MessageSquare, Linkedin, ExternalLink, Copy, CheckCircle2, Send } from 'lucide-react';
+import { PRICING_PLANS } from '../data/portfolioData';
+import { Check, Clock, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PricingPlan } from '../types';
+import { PaymentModal } from './PaymentModal';
 
 interface PricingSectionProps {
   onSelectPlan: (planName: string) => void;
@@ -10,13 +11,6 @@ interface PricingSectionProps {
 
 export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) => {
   const [selectedPlanModal, setSelectedPlanModal] = useState<PricingPlan | null>(null);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  };
 
   const handleOpenContactForm = (planName: string) => {
     onSelectPlan(planName);
@@ -145,135 +139,15 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
         </motion.div>
       </div>
 
-      {/* Payment Coming Soon Modal */}
+      {/* Payment choice: manual bank transfer or inquiry/contact */}
       <AnimatePresence>
         {selectedPlanModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPlanModal(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
-            />
-
-            {/* Modal Box */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-md bg-[#161717] dark-code-block border border-[#383A39] rounded-2xl p-6 sm:p-7 shadow-2xl z-10 text-slate-200 overflow-hidden"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedPlanModal(null)}
-                className="absolute top-4 right-4 p-2 bg-[#242625] hover:bg-[#383A39] text-slate-300 rounded-lg border border-[#383A39] transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              {/* Badge & Notice */}
-              <div className="text-center space-y-3">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#CD6E4E]/10 border border-[#CD6E4E]/30 text-[#CD6E4E]">
-                  <CreditCard className="w-6 h-6" />
-                </div>
-
-                <div className="space-y-1">
-                  <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#CD6E4E]/10 text-[#CD6E4E] border border-[#CD6E4E]/20 text-[11px] font-bold uppercase tracking-wider">
-                    Package: {selectedPlanModal.name} ({selectedPlanModal.price})
-                  </div>
-                  <h3 className="text-xl font-black text-white tracking-tight">
-                    Payment Option Coming Soon
-                  </h3>
-                  <p className="text-xs text-amber-400 font-semibold tracking-wide uppercase">
-                    For Now Contact At
-                  </p>
-                </div>
-              </div>
-
-              {/* Contact Details & Options List */}
-              <div className="mt-6 space-y-3">
-                {/* Email Option */}
-                <div className="p-3 bg-[#1d1f1e] rounded-xl border border-[#383A39] flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="p-2 bg-[#242625] rounded-lg text-[#CD6E4E] border border-[#383A39] shrink-0">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[10px] text-slate-400 uppercase font-mono">Direct Email</div>
-                      <div className="text-xs font-semibold text-white truncate">{PERSONAL_INFO.email}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button
-                      onClick={handleCopyEmail}
-                      className="p-2 bg-[#242625] hover:bg-[#383A39] text-slate-300 rounded-lg border border-[#383A39] transition-colors cursor-pointer text-[10px] flex items-center gap-1"
-                      title="Copy Email"
-                    >
-                      {copiedEmail ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    </button>
-                    <a
-                      href={`mailto:${PERSONAL_INFO.email}?subject=Inquiry for ${selectedPlanModal.name}`}
-                      className="p-2 bg-[#CD6E4E] hover:bg-[#E07E5D] text-[#161717] font-bold rounded-lg transition-colors cursor-pointer text-[10px] flex items-center gap-1"
-                      title="Send Mail"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                </div>
-
-                {/* WhatsApp Option */}
-                <a
-                  href={PERSONAL_INFO.socials.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-[#1d1f1e] hover:bg-[#242625] hover:border-[#CD6E4E]/50 rounded-xl border border-[#383A39] flex items-center justify-between gap-3 transition-colors group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 bg-[#242625] group-hover:bg-[#CD6E4E]/10 rounded-lg text-emerald-400 border border-[#383A39] shrink-0 transition-colors">
-                      <MessageSquare className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-400 uppercase font-mono">WhatsApp Instant Chat</div>
-                      <div className="text-xs font-semibold text-white">{PERSONAL_INFO.whatsapp}</div>
-                    </div>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-[#CD6E4E] transition-colors" />
-                </a>
-
-                {/* LinkedIn Option */}
-                <a
-                  href={PERSONAL_INFO.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-[#1d1f1e] hover:bg-[#242625] hover:border-[#CD6E4E]/50 rounded-xl border border-[#383A39] flex items-center justify-between gap-3 transition-colors group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 bg-[#242625] group-hover:bg-[#CD6E4E]/10 rounded-lg text-sky-400 border border-[#383A39] shrink-0 transition-colors">
-                      <Linkedin className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-400 uppercase font-mono">LinkedIn Profile</div>
-                      <div className="text-xs font-semibold text-white">Ali Ahsan</div>
-                    </div>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-[#CD6E4E] transition-colors" />
-                </a>
-
-                {/* Direct Website Message Form Option */}
-                <button
-                  onClick={() => handleOpenContactForm(selectedPlanModal.name)}
-                  className="w-full py-3 px-4 bg-[#CD6E4E] hover:bg-[#E07E5D] text-[#161717] font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg mt-2"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Send Direct Inquiry Message</span>
-                </button>
-              </div>
-            </motion.div>
-          </div>
+          <PaymentModal
+            key={selectedPlanModal.id}
+            plan={selectedPlanModal}
+            onClose={() => setSelectedPlanModal(null)}
+            onOpenInquiryForm={handleOpenContactForm}
+          />
         )}
       </AnimatePresence>
     </section>
